@@ -1,0 +1,8 @@
+# simulation output (regenerate with scripts/reproduce_paper.sh)
+data/
+figures/*.pdf
+figures/*.png
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.DS_Store
