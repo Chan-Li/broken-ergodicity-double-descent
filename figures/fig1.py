@@ -40,7 +40,7 @@ ax[0].tick_params(axis="both", labelsize=25)
 
 # ------------------------------------------------------------------ panel (b)
 dyn_alphas = [0.5, 1.0, 4.0]
-gamma_b = 1.0
+gamma_b = 0.5
 d1b = os.path.join(args.data, "fig1b")
 dmft = np.load(os.path.join(args.data, "fig1b_dmft.npz"))
 n = dmft["eps_g"].shape[1]

@@ -72,7 +72,7 @@ python figures/fig1.py                  # -> figures/fig1.pdf
 | Figure | Content | Parameters | Data |
 |---|---|---|---|
 | 1(a) | steady-state ε_g, ε_t vs α | N = 1000, γ = 0.5, ζ = 0.1, 10⁴ steps, 10 runs | `data/fig1a` |
-| 1(b) | ε_g(t), ε_t(t): SGD vs DMFT | N = 1000, α ∈ {0.5, 1, 4}, 200 steps | `data/fig1b`, `data/fig1b_dmft.npz` |
+| 1(b) | ε_g(t), ε_t(t): SGD vs DMFT | N = 1000, γ = 0.5, α ∈ {0.5, 1, 4}, 200 steps | `data/fig1b`, `data/fig1b_dmft.npz` |
 | 2 | dynamical data collapse, λ = 0 | N = 10⁴, γ = 0.5, T = 10⁴, 10 runs | `data/fig2` |
 | 3 | static and dynamical collapse with λ > 0 | N = 10⁴, γ = 1, λ ∈ [10⁻⁴, 1], 10 runs | `data/fig3_static`, `data/fig3_dynamic` |
 | 4 | peak height and shift of ε_g | N = 10⁴, γ = 1, r = 0.1, 50 runs, bootstrap B = 1000 | `data/fig4` |
