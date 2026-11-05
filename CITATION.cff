@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the paper below."
+title: "broken-ergodicity-double-descent"
+authors:
+  - family-names: Li
+    given-names: Chan
+  - family-names: Goldenfeld
+    given-names: Nigel
+license: MIT
+repository-code: "https://github.com/Chan-Li/broken-ergodicity-double-descent"
+preferred-citation:
+  type: article
+  title: "Broken Ergodicity and the Violation of the Fluctuation–Dissipation Theorem Lead to Generalization Beyond Overfitting in Machine Learning"
+  authors:
+    - family-names: Li
+      given-names: Chan
+    - family-names: Goldenfeld
+      given-names: Nigel
+  journal: "Physical Review Letters"
+  year: 2026
+  notes: "Accepted. arXiv:2607.04135"
+  url: "https://arxiv.org/abs/2607.04135"
+  identifiers:
+    - type: other
+      value: "arXiv:2607.04135"
+      description: "arXiv preprint"

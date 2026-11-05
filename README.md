@@ -1,9 +1,13 @@
 # Broken ergodicity and double descent
 
+[![arXiv](https://img.shields.io/badge/arXiv-2607.04135-b31b1b.svg)](https://arxiv.org/abs/2607.04135)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
 Code for the paper
 
 > **Broken Ergodicity and the Violation of the Fluctuation–Dissipation Theorem Lead to Generalization Beyond Overfitting in Machine Learning**
 > Chan Li and Nigel Goldenfeld
+> *Physical Review Letters* (accepted, 2026) · [arXiv:2607.04135](https://arxiv.org/abs/2607.04135)
 
 We study double descent in teacher–student linear regression trained by stochastic
 gradient descent, using dynamical mean-field theory (DMFT). The interpolation
@@ -15,8 +19,11 @@ contains:
 
 * SGD simulations of the teacher–student model (Eqs. 1–3),
 * a numerical solver for the self-consistent DMFT equations (Eqs. 4–5, 8),
-* the analytic predictions (Eqs. 6, 7, 9, 12, 15),
+* the analytic predictions (Eqs. 6, 7, 9, 12, 13, 15),
 * scripts that regenerate the data and every figure of the paper.
+
+Equation numbers refer to the published Letter (Eqs. 12–15 are in the End Matter); "SM" is its
+Supplemental Material.
 
 ## Installation
 
@@ -71,10 +78,10 @@ python figures/fig1.py                  # -> figures/fig1.pdf
 
 | Figure | Content | Parameters | Data |
 |---|---|---|---|
-| 1(a) | steady-state ε_g, ε_t vs α | N = 1000, γ = 0.5, ζ = 0.1, 10⁴ steps, 10 runs | `data/fig1a` |
+| 1(a) | steady-state ε_g, ε_t vs α | N = 1000, γ = 0.5, ζ = 0.1, T = 10⁴ for 0.9 ≤ α ≤ 1.1 and T = 10³ otherwise, 10 runs | `data/fig1a` |
 | 1(b) | ε_g(t), ε_t(t): SGD vs DMFT | N = 1000, γ = 0.5, α ∈ {0.5, 1, 4}, 200 steps | `data/fig1b`, `data/fig1b_dmft.npz` |
 | 2 | dynamical data collapse, λ = 0 | N = 10⁴, γ = 0.5, T = 10⁴, 10 runs | `data/fig2` |
-| 3 | static and dynamical collapse with λ > 0 | N = 10⁴, γ = 1, λ ∈ [10⁻⁴, 1], 10 runs | `data/fig3_static`, `data/fig3_dynamic` |
+| 3 | static and dynamical collapse with λ > 0 | N = 10⁴, γ = 1, 10 runs; (a, c) λ ∈ [0.01, 1], T = 10³; (b, d) λ ∈ {1, 3, 5} × 10⁻⁴, T = 10⁴ | `data/fig3_static`, `data/fig3_dynamic` |
 | 4 | peak height and shift of ε_g | N = 10⁴, γ = 1, r = 0.1, 50 runs, bootstrap B = 1000 | `data/fig4` |
 
 All runs use D = 1 and ζ = 0.1. Every parameter point is an independent command
@@ -95,6 +102,12 @@ in `scripts/reproduce_paper.sh`, so the work can be split across cluster jobs.
   teacher and label noise are rejection-sampled so that their empirical variances equal r and D
   (`--exact-teacher --exact-noise`). Each run continues until ε_g stops changing
   (`--early-stop-tol`), and the final ε_g is averaged over 20 fresh test sets (`--final-test`).
+  The peak height and position are bootstrapped (B = 1000); as described in SM Sec. III.B, the
+  error bars are the standard deviation of the mean, std/√B.
+* **Fig. 3** uses the leading-order scaling variables of Eq. (13) (factor 4). The exact form
+  (SM Sec. V.A.2) has 2α(1 + α) in place of 4; the two agree at α = 1.
+* **Fig. 1(b) DMFT.** The response-function iteration starts from i.i.d. standard Gaussian entries
+  below the diagonal, and Ĉ(0,0), Q(0) and r are set from the same random draw as the SGD run.
 
 ## Using the DMFT solver
 
@@ -113,14 +126,23 @@ O(n_t³) per iteration, so it is meant for short time windows (n_t = T/dt ≈ 20
 
 ## Citation
 
+If you use this code, please cite
+
 ```bibtex
-@article{li_goldenfeld_double_descent,
-  title   = {Broken Ergodicity and the Violation of the Fluctuation--Dissipation Theorem
-             Lead to Generalization Beyond Overfitting in Machine Learning},
-  author  = {Li, Chan and Goldenfeld, Nigel},
-  year    = {2026}
+@article{li2026broken,
+  title         = {Broken Ergodicity and the Violation of the Fluctuation--Dissipation Theorem
+                   Lead to Generalization Beyond Overfitting in Machine Learning},
+  author        = {Li, Chan and Goldenfeld, Nigel},
+  journal       = {Physical Review Letters},
+  note          = {Accepted},
+  year          = {2026},
+  eprint        = {2607.04135},
+  archivePrefix = {arXiv},
+  url           = {https://arxiv.org/abs/2607.04135}
 }
 ```
+
+GitHub also reads [`CITATION.cff`](CITATION.cff) ("Cite this repository" button).
 
 ## License
 

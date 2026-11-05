@@ -1,7 +1,10 @@
 """Fig. 3 - static and dynamical scaling with weak l2 regularisation (gamma = 1).
 
-(a, c) eps_g(t->inf) |1-alpha| vs x = 4 lambda / (gamma (1-alpha)^2)  ->  F~(x) = 1/sqrt(1+x)
-(b, d) eps_g(t) |1-alpha| sqrt(1 + x) vs the rescaled time            ->  F(x), Eq. (12)
+(a, c) eps_g(t->inf) |1-alpha| vs x = 4 lambda / (gamma (1-alpha)^2)  ->  1/F~(x) = 1/sqrt(1+x)
+(b, d) eps_g(t) |1-alpha| sqrt(1 + x) vs [gamma (1-alpha)^2 / 4 + lambda] t ->  F(x), Eq. (12)
+
+As in the paper, the leading-order scaling variables of Eq. (13) are used (factor 4); the exact
+form (SM Sec. V.A.2) has 2 alpha (1 + alpha) in place of 4, and the two agree at alpha = 1.
 
 Data: data/fig3_static (T = 1000) and data/fig3_dynamic (T = 10^4).
 """
@@ -44,7 +47,7 @@ for row, (sset, fmt, xmin) in enumerate([(static_sets[0], "o", 2.0), (static_set
                             label=rf"$\alpha={a}$", zorder=1)
     xx = np.linspace(xmin, xmax, 20000)
     ax[row][0].plot(xx, theory.F_static(xx, D), color="red", lw=3.0,
-                    label=r"$\tilde{F}(x) = \frac{1}{\sqrt{1+x}}$", zorder=2)
+                    label=r"$1/\tilde{F}(x) = \frac{1}{\sqrt{1+x}}$", zorder=2)
     ax[row][0].legend(fontsize=18)
     ax[row][0].tick_params(axis="both", labelsize=25)
 sym = [r"1-\alpha", r"\alpha-1"]
@@ -53,18 +56,18 @@ for row in range(2):
     ax[row][0].set_ylabel(rf"$\varepsilon_g(t\to\infty)(|{sym[row]}|)$", fontsize=25)
 
 # ------------------------------------------------------ (b), (d) dynamical collapse
-# The rescaling uses 2 alpha (1 + alpha) in place of 4 gamma; the two agree at alpha = 1.
+# Leading-order rescaling, Eq. (13): factor 4 (exact form: 2 alpha (1 + alpha), equal at alpha = 1).
 sl = slice(20, None, 2000)
 for row, (alist, fmt) in enumerate([(dyn_sets[0], "o"), (dyn_sets[1], "D")]):
     cols = blues if row == 0 else greys
     k = 0
     for a in alist:
         for l in dyn_lams:
-            c = 2 * a * (1 + a)
+            c = 4.0
             eg = stacked(ddir, a, gamma, l, "err_g")[:, :n_steps]
             t = np.arange(eg.shape[1]) * dt
-            eg = eg * abs(1 - a) * np.sqrt(1 + c * l / (1 - a) ** 2)
-            x = ((1 - a) ** 2 / c + l) * t[sl]
+            eg = eg * abs(1 - a) * np.sqrt(1 + c * l / (gamma * (1 - a) ** 2))
+            x = (gamma * (1 - a) ** 2 / c + l) * t[sl]
             ax[row][1].errorbar(x, eg.mean(0)[sl], yerr=eg.std(0, ddof=1)[sl], color=cols[k], fmt=fmt,
                                 label=rf"$\alpha={a}, \lambda = {l}$", zorder=1)
             k += 1

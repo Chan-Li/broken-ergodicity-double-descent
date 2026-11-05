@@ -39,7 +39,7 @@ def F_scaling(x, D=1.0):
 
 
 def F_static(x, D=1.0):
-    """Static scaling factor with regularisation: D / sqrt(1 + x), x = 4 lambda / (gamma (1-alpha)^2)."""
+    """Static collapse curve D / F~(x) = D / sqrt(1 + x), with F~(x) = sqrt(1 + x) and x = 4 lambda / (gamma (1-alpha)^2)."""
     return D / np.sqrt(1.0 + np.asarray(x))
 
 

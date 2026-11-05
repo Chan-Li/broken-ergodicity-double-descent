@@ -34,7 +34,7 @@ ax[0].plot(fit, theory.eg_over(fit, C00, D), color="grey",
            label=r"$\frac{(\alpha-1)C(0,0)}{\alpha} + \frac{D\alpha}{\alpha-1}$")
 ax[0].plot(alphas, theory.et_under(alphas, D), color="blue", label=r"$D(1-\alpha)H(1-\alpha)$")
 ax[0].legend(fontsize=14.5)
-ax[0].set_xlabel(r"$\alpha = \frac{d}{n}$", fontsize=30)
+ax[0].set_xlabel(r"$\alpha = \frac{d}{N}$", fontsize=30)
 ax[0].set_ylabel("Error Value", fontsize=25)
 ax[0].tick_params(axis="both", labelsize=25)
 
@@ -60,7 +60,7 @@ for j, a in enumerate(dyn_alphas):
                               fmt=markers[j], ls="none", label=rf"$SGD:\alpha = {a}$"))
     ax[1].plot(it, dmft["eps_t"][j], lw=2, color="orchid")
     ax[1].plot(it, dmft["eps_g"][j], lw=2, color="purple")
-ax[1].set_xlabel("Iterations", fontsize=25, color="blue")
+ax[1].set_xlabel("Iterations", fontsize=25)
 ax[1].set_ylabel("Error Value", fontsize=25)
 ax[1].tick_params(axis="both", labelsize=25)
 ax[1].set_ylim(-0.1, 5.7)

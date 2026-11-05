@@ -12,9 +12,12 @@ DATA=${DATA:-data}
 SGD="python scripts/run_sgd.py --skip-existing"
 
 fig1() {
-  # (a) steady-state errors vs alpha: N = 1000, gamma = 0.5, 10^4 steps (T = 1000, zeta = 0.1)
+  # (a) steady-state errors vs alpha: N = 1000, gamma = 0.5, zeta = 0.1.
+  #     T = 10^4 (10^5 steps) for 0.9 <= alpha <= 1.1, T = 10^3 (10^4 steps) elsewhere.
   $SGD --N 1000 --gamma 0.5 --T 1000 --dt 0.1 --runs 10 --outdir "$DATA/fig1a" \
-       --alphas 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 0.92 0.94 0.96 1.04 1.06 1.1 1.3 1.5 1.8 2.0 3.0 4.0 5.0
+       --alphas 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 1.3 1.5 1.8 2.0 3.0 4.0 5.0
+  $SGD --N 1000 --gamma 0.5 --T 10000 --dt 0.1 --runs 10 --outdir "$DATA/fig1a" \
+       --alphas 0.9 0.92 0.94 0.96 1.04 1.06 1.1
   # (b) early-time dynamics: N = 1000, gamma = 0.5, 200 steps (T = 20), SGD vs DMFT
   $SGD --N 1000 --gamma 0.5 --T 20 --dt 0.1 --runs 10 --outdir "$DATA/fig1b" --alphas 0.5 1.0 4.0
   python scripts/run_dmft.py --alphas 0.5 1.0 4.0 --gamma 0.5 --T 20 --dt 0.1 --out "$DATA/fig1b_dmft.npz"

@@ -39,14 +39,14 @@ xs = [np.linspace(0, 13, 1000), np.linspace(0, 5, 1000)]
 for row in range(2):
     ax[row][1].plot(xs[row], theory.F_scaling(xs[row]), color="red", label="F(x)", lw=3.0, zorder=2)
     ax[row][0].set_xlabel("t", fontsize=25)
-    ax[row][0].set_ylabel(r"$\epsilon_g(t)$", fontsize=25)
+    ax[row][0].set_ylabel(r"$\varepsilon_g(t)$", fontsize=25)
     ax[row][0].legend(fontsize=13.5, loc="upper left")
     for col in range(2):
         ax[row][col].tick_params(axis="both", labelsize=25)
 ax[0][1].set_xlabel(r"$(1-\alpha)^2{\gamma t}/4$", fontsize=25)
-ax[0][1].set_ylabel(r"$\epsilon_g (1-\alpha)$", fontsize=25)
+ax[0][1].set_ylabel(r"$\varepsilon_g (1-\alpha)$", fontsize=25)
 ax[1][1].set_xlabel(r"$(\alpha-1)^2{\gamma t}/4$", fontsize=25)
-ax[1][1].set_ylabel(r"$\epsilon_g (\alpha-1)$", fontsize=25)
+ax[1][1].set_ylabel(r"$\varepsilon_g (\alpha-1)$", fontsize=25)
 
 panel_labels(fig, [(0.08, 0.53), (0.50, 0.53), (0.08, 0.08), (0.50, 0.08)])
 plt.savefig(args.out, bbox_inches="tight")
